@@ -1,228 +1,300 @@
+/* eslint-disable react/no-unescaped-entities */
 "use client";
-import { motion, useScroll } from "framer-motion";
-import Brain from "../components/brainSVG";
+import ScrollSVG from "@/components/scrollSVG";
+// import Brain from "@/components/brain";
+import { motion, useInView } from "framer-motion";
+import Image from "next/image";
 import { useRef } from "react";
 
 const AboutPage = () => {
   const containerRef = useRef();
 
-  const { scrollYProgress } = useScroll({ container: containerRef });
+  const skillRef = useRef();
+  // const isSkillRefInView = useInView(skillRef, {once:true});
+  const isSkillRefInView = useInView(skillRef, { margin: "-100px" });
 
-  console.log(scrollYProgress);
+  const experienceRef = useRef();
+  const isExperienceRefInView = useInView(experienceRef, { margin: "-100px" });
+
+  const experienceMobRef = useRef();
+  const isExperienceMobRefInView = useInView(experienceMobRef, {
+    margin: "-100px",
+  });
+
+  const skills = [
+    "HTML",
+    "CSS",
+    "Tailwind CSS",
+    "Bootstrap",
+    "Javascript",
+    "React.js",
+    "Next.js",
+    "Vite",
+    "Node.js",
+    "Framer Motion",
+    "PHP",
+    "SQL",
+    "MySQL",
+    "Git",
+    "Figma",
+  ];
+
+  const experiences = [
+    {
+      title: "Full Stack Web Developer",
+      description:
+        "I spearheaded project planning and development as a Full Stack Developer, and led a team to develop compelling websites.",
+      year: "2022 - 2023",
+      company: "Sirius Creative",
+    },
+    {
+      title: "Full Stack Web Developer Intern",
+      description:
+        "I used HTML, CSS, JavaScript, Bootstrap, PHP, and secure SQL to build websites that made the company work better, kept our data safe, and easy to get to.",
+      year: "Mar 2022 - May 2022",
+      company: "Rumahweb Indonesia",
+    },
+    {
+      title: "Laboratory Assistant",
+      description:
+        "Conducted practical courses, created quizzes, and evaluated assignments to support student learning.",
+      year: "2021 - 2023",
+      company: "Pembangunan Nasional 'Veteran' University Yogyakarta",
+    },
+  ];
 
   return (
     <motion.div
-      className="h-full"
+      className="h-full overflowx-hidden"
       initial={{ y: "-200vh" }}
       animate={{ y: "0%" }}
       transition={{ duration: 1 }}
     >
-      {/* Container */}
-      <div
-        className="h-full overflow-y-scroll overflow-x-hidden lg:flex"
-        ref={containerRef}
-      >
-        {/* Text Container */}
-        <div className="p-4 sm:p-8 md:p-12 lg:p-20 lg:pr-0 xl:p-48 flex flex-col gap-24 md:gap-32 lg:gap-48 xl:gap-64 w-2/3 xl:w-1/2">
-          {/* Biography Container */}
+      {/* CONTAINER */}
+      <div className="h-full lg:flex justify-center" ref={containerRef}>
+        {/* TEXT CONTAINER */}
+        <div className="w-full h-fit p-8 sm:p-16 md:p-20 xl:py-20 flex flex-col lg:w-2/3 gap-40 md:gap-60">
+          {/* BIOGRAPHY CONTAINER */}
           <div className="flex flex-col gap-12 justify-center">
-            {/* Biography Title */}
+            {/* BIOGRAPHY IMAGE */}
+            <Image
+              unoptimized
+              src="/profile-pict.webp"
+              alt=""
+              width={1000}
+              height={1000}
+              className="w-full h-32 md:h-52 lg:h-60 object-cover object-top"
+            />
+            {/* BIOGRAPHY TITLE */}
             <h1 className="font-bold text-2xl">BIOGRAPHY</h1>
-            {/* Biography Description */}
-            <p>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit. Cumque
-              maxime quae facilis nihil. Amet necessitatibus, a illo id veniam
-              et quisquam, non expedita nulla voluptate aut, consequuntur
-              voluptatem voluptates! Temporibus!
+            {/* BIOGRAPHY DESC */}
+            <p className="text-md lg:text-lg">
+              I am a fresh graduate with a Bachelor's degree in Informatics from
+              Universitas Pembangunan Nasional 'Veteran' Yogyakarta,
+              specializing in Web Development. With experience as a Full-Stack
+              Web Developer at Sirius Creative and an Internship at Rumahweb
+              Indonesia, I have honed strong technical skills in front-end
+              frameworks such as Next.js and React.js. My analytical skills and
+              problem-solving abilities were further sharpened during my tenure
+              as a Laboratory Assistant at UPN 'Veteran' Yogyakarta. I am
+              dedicated to producing clean and efficient code, thrive in both
+              collaborative and independent environments, and consistently
+              strive for integrity and excellence in every project.
             </p>
-            {/* Scroll SVG */}
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              width={50}
-              height={50}
-            >
-              <path
-                d="M5 15C5 16.8565 5.73754 18.6371 7.05029 19.9498C8.36305 21.2626 10.1435 21.9999 12 21.9999C13.8565 21.9999 15.637 21.2626 16.9498 19.9498C18.2625 18.6371 19 16.8565 19 15V9C19 7.14348 18.2625 5.36305 16.9498 4.05029C15.637 2.73754 13.8565 2 12 2C10.1435 2 8.36305 2.73754 7.05029 4.05029C5.73754 5.36305 5 7.14348 5 9V15Z"
-                stroke="#000000"
-                strokeWidth="1"
-              ></path>
-              <path d="M12 6V14" stroke="#000000" strokeWidth="1"></path>
-              <path
-                d="M15 11L12 14L9 11"
-                stroke="#000000"
-                strokeWidth="1"
-              ></path>
-            </svg>
+            {/* BIOGRAPHY SCROLL SVG */}
+            <ScrollSVG />
           </div>
-          {/* Skills Container */}
-          <div className="flex flex-col gap-12 justify-center">
-            {/* Skills Title */}
-            <h1 className="font-bold text-2xl">SKILLS</h1>
-            {/* Skill List */}
-            <div className="flex gap-4 flex-wrap">
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                HTML5
-              </div>
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                CSS3
-              </div>
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                Javascript
-              </div>
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                React.js
-              </div>
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                Next.js
-              </div>
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                PHP
-              </div>
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                SQL
-              </div>
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                MySQL
-              </div>
-              <div className="rounded p-2 text-sm cursor-pointer text-white bg-black hover:bg-white hover:text-black ring-1 ring-black font-bold">
-                Python
-              </div>
-            </div>
-            {/* Scroll SVG */}
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              width={50}
-              height={50}
+          {/* SKILLS CONTAINER */}
+          <div className="flex flex-col gap-12 justify-center" ref={skillRef}>
+            {/* SKILL TITLE */}
+            <motion.h1
+              initial={{ x: "-300px" }}
+              animate={isSkillRefInView ? { x: 0 } : {}}
+              transition={{ delay: 0.2 }}
+              className="font-bold text-2xl"
             >
-              <path
-                d="M5 15C5 16.8565 5.73754 18.6371 7.05029 19.9498C8.36305 21.2626 10.1435 21.9999 12 21.9999C13.8565 21.9999 15.637 21.2626 16.9498 19.9498C18.2625 18.6371 19 16.8565 19 15V9C19 7.14348 18.2625 5.36305 16.9498 4.05029C15.637 2.73754 13.8565 2 12 2C10.1435 2 8.36305 2.73754 7.05029 4.05029C5.73754 5.36305 5 7.14348 5 9V15Z"
-                stroke="#000000"
-                strokeWidth="1"
-              ></path>
-              <path d="M12 6V14" stroke="#000000" strokeWidth="1"></path>
-              <path
-                d="M15 11L12 14L9 11"
-                stroke="#000000"
-                strokeWidth="1"
-              ></path>
-            </svg>
+              SKILLS
+            </motion.h1>
+            {/* SKILL LIST */}
+            <motion.div
+              initial={{ x: "-300px" }}
+              animate={isSkillRefInView ? { x: 0 } : {}}
+              className="flex gap-4 flex-wrap"
+            >
+              {skills.map((skill, index) => (
+                <div
+                  key={index}
+                  className="rounded py-2 px-4 text-md lg:text-xl cursor-pointer ring-1 ring-black bg-black text-white hover:bg-white hover:text-black"
+                >
+                  {skill}
+                </div>
+              ))}
+            </motion.div>
+            {/* SKILL SCROLL SVG */}
+            <ScrollSVG />
           </div>
-          {/* Experience Container */}
-          <div className="flex flex-col gap-12 justify-center">
-            {/* Experience Title */}
-            <h1 className="font-bold text-2xl">EXPERIENCES</h1>
-            {/* Experience List */}
-            <div className="">
-              {/* Experience List Item */}
-              <div className="flex justify-between h-48">
-                {/* Left */}
-                <div className="w-1/3">
-                  {/* Job Title */}
-                  <div className="bg-white p-3 font-semibold rounded-bg-lg rounded-s-lg">
-                    Senior Javascript Engineer
+          {/* EXPERIENCE CONTAINER */}
+          <div
+            className="md:flex flex-col gap-12 justify-center pb-48 hidden"
+            ref={experienceRef}
+          >
+            {/* EXPERIENCE TITLE */}
+            <motion.h1
+              initial={{ x: "-600px" }}
+              animate={isExperienceRefInView ? { x: "0" } : {}}
+              transition={{ delay: 0.2 }}
+              className="font-bold text-2xl"
+            >
+              EXPERIENCE
+            </motion.h1>
+            {/* EXPERIENCE LIST */}
+            <motion.div
+              initial={{ x: "-600px" }}
+              animate={isExperienceRefInView ? { x: "0" } : {}}
+              className=""
+            >
+              {/* EXPERIENCE LIST ITEM */}
+              <div className="flex justify-between h-50">
+                {/* LEFT */}
+                <div className="w-1/3 ">
+                  {/* JOB TITLE */}
+                  <div className="bg-white pe-1 pb-1 md:pe-2 md:pb-2 font-semibold rounded-b-lg rounded-s-lg">
+                    {experiences[0].title}
                   </div>
-                  {/* Job Description */}
-                  <div className="p-3 text-sm italic">
-                    I led web development, offering expertise in JavaScript
-                    frameworks.
+                  {/* JOB DESC */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 text-sm italic">
+                    {experiences[0].description}
                   </div>
-                  {/* Job Date */}
-                  <div className="p-3 text-red-400 text-sm font-semibold">
-                    2020-Present
+                  {/* JOB DATE */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 text-blue-600 text-sm font-semibold">
+                    {experiences[0].year}
                   </div>
-                  {/* Job Company */}
-                  <div className="p-1 rounded bg-white text-sm font-semibold w-fit">
-                    GoTo
+                  {/* JOB COMPANY */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 rounded bg-white text-sm font-semibold w-fit">
+                    {experiences[0].company}
                   </div>
                 </div>
-                {/* Center */}
+                {/* CENTER */}
                 <div className="w-1/6 flex justify-center">
-                  {/* Line */}
+                  {/* LINE */}
                   <div className="w-1 h-full bg-gray-600 rounded relative">
-                    {/* Line Circle */}
-                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400 bg-white -left-2"></div>
+                    {/* LINE CIRCLE */}
+                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-blue-600 bg-white -left-2"></div>
                   </div>
                 </div>
-                {/* Right */}
-                <div className="w-1/3"></div>
+                {/* RIGHT */}
+                <div className="w-1/3 "></div>
               </div>
-              {/* Experience List Item */}
-              <div className="flex justify-between h-48">
-                {/* Left */}
-                <div className="w-1/3"></div>
-                {/* Center */}
+              {/* EXPERIENCE LIST ITEM */}
+              <div className="flex justify-between h-50">
+                {/* LEFT */}
+                <div className="w-1/3 "></div>
+                {/* CENTER */}
                 <div className="w-1/6 flex justify-center">
-                  {/* Line */}
+                  {/* LINE */}
                   <div className="w-1 h-full bg-gray-600 rounded relative">
-                    {/* Line Circle */}
-                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400 bg-white -left-2"></div>
+                    {/* LINE CIRCLE */}
+                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-blue-600 bg-white -left-2"></div>
                   </div>
                 </div>
-                {/* Right */}
-                <div className="w-1/3">
-                  {/* Job Title */}
-                  <div className="bg-white p-3 font-semibold rounded-bg-lg rounded-s-lg">
-                    Senior Javascript Engineer
+                {/* RIGHT */}
+                <div className="w-1/3 ">
+                  {/* JOB TITLE */}
+                  <div className="bg-white pe-1 pb-1 md:pe-2 md:pb-2 font-semibold rounded-b-lg rounded-s-lg">
+                    {experiences[1].title}
                   </div>
-                  {/* Job Description */}
-                  <div className="p-3 text-sm italic">
-                    I led web development, offering expertise in JavaScript
-                    frameworks.
+                  {/* JOB DESC */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 text-sm italic">
+                    {experiences[1].description}
                   </div>
-                  {/* Job Date */}
-                  <div className="p-3 text-red-400 text-sm font-semibold">
-                    2020-Present
+                  {/* JOB DATE */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 text-blue-600 text-sm font-semibold">
+                    {experiences[1].year}
                   </div>
-                  {/* Job Company */}
-                  <div className="p-1 rounded bg-white text-sm font-semibold w-fit">
-                    GoTo
+                  {/* JOB COMPANY */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 rounded bg-white text-sm font-semibold w-fit">
+                    {experiences[1].company}
                   </div>
                 </div>
               </div>
-              {/* Experience List Item */}
-              <div className="flex justify-between h-48">
-                {/* Left */}
-                <div className="w-1/3">
-                  {/* Job Title */}
-                  <div className="bg-white p-3 font-semibold rounded-bg-lg rounded-s-lg">
-                    Senior Javascript Engineer
+              {/* EXPERIENCE LIST ITEM */}
+              <div className="flex justify-between h-50">
+                {/* LEFT */}
+                <div className="w-1/3 ">
+                  {/* JOB TITLE */}
+                  <div className="bg-white pe-1 pb-1 md:pe-2 md:pb-2 font-semibold rounded-b-lg rounded-s-lg">
+                    {experiences[2].title}
                   </div>
-                  {/* Job Description */}
-                  <div className="p-3 text-sm italic">
-                    I led web development, offering expertise in JavaScript
-                    frameworks.
+                  {/* JOB DESC */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 text-sm italic">
+                    {experiences[2].description}
                   </div>
-                  {/* Job Date */}
-                  <div className="p-3 text-red-400 text-sm font-semibold">
-                    2020-Present
+                  {/* JOB DATE */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 text-blue-600 text-sm font-semibold">
+                    {experiences[2].year}
                   </div>
-                  {/* Job Company */}
-                  <div className="p-1 rounded bg-white text-sm font-semibold w-fit">
-                    GoTo
+                  {/* JOB COMPANY */}
+                  <div className="pe-1 pb-1 md:pe-2 md:pb-2 rounded bg-white text-sm font-semibold w-fit">
+                    {experiences[2].company}
                   </div>
                 </div>
-                {/* Center */}
+                {/* CENTER */}
                 <div className="w-1/6 flex justify-center">
-                  {/* Line */}
+                  {/* LINE */}
                   <div className="w-1 h-full bg-gray-600 rounded relative">
-                    {/* Line Circle */}
-                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-red-400 bg-white -left-2"></div>
+                    {/* LINE CIRCLE */}
+                    <div className="absolute w-5 h-5 rounded-full ring-4 ring-blue-600 bg-white -left-2"></div>
                   </div>
                 </div>
-                {/* Right */}
-                <div className="w-1/3"></div>
+                {/* RIGHT */}
+                <div className="w-1/3 "></div>
               </div>
-            </div>
+            </motion.div>
+          </div>
+          {/* EXPERIENCE CONTAINER */}
+          <div
+            className="flex flex-col gap-12 justify-center pb-48 md:hidden"
+            ref={experienceMobRef}
+          >
+            {/* EXPERIENCE TITLE MOBILE */}
+            <motion.h1
+              initial={{ x: "-600px" }}
+              animate={isExperienceMobRefInView ? { x: "0" } : {}}
+              transition={{ delay: 0.2 }}
+              className="font-bold text-2xl"
+            >
+              EXPERIENCE
+            </motion.h1>
+            {experiences.map((experience) => (
+              <motion.div
+                className="w-full ring-1 ring-gray-100 py-6 px-10 rounded-lg shadow-xl"
+                initial={{ x: "-600px" }}
+                animate={isExperienceMobRefInView ? { x: "0" } : {}}
+                key={experience.title}
+              >
+                {/* JOB TITLE */}
+                <h1 className="card-title text-lg font-bold">
+                  {experience.title}
+                </h1>
+                {/* JOB COMPANY */}
+                <div className="pe-1 pb-1 md:pe-2 md:pb-2 rounded bg-white text-sm font-semibold w-fit">
+                  {experience.company}
+                </div>
+                {/* JOB DATE */}
+                <div className="pe-1 pb-1 md:pe-2 md:pb-2 text-blue-600 text-sm font-semibold">
+                  {experience.year}
+                </div>
+                {/* JOB DESC */}
+                <p className="text-sm italic">{experience.description}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
-        {/* SVG Container */}
-        <div className="hidden lg:block w-1/3 xl:w-1/2 sticky top-0 z-30">
+
+        {/* SVG CONTAINER */}
+        {/* <div className="hidden lg:block w-1/3 sticky top-0 z-30 xl:w-1/2">
           <Brain scrollYProgress={scrollYProgress} />
-        </div>
+        </div> */}
       </div>
     </motion.div>
   );
