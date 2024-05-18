@@ -3,7 +3,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import NavLink from "/NavLink";
+import NavLink from "./navLink";
 import { motion } from "framer-motion";
 
 const links = [
@@ -20,7 +20,7 @@ const social = [
     image: "/netlify.png",
   },
   { url: "https://www.instagram.com/egaerinovian/", image: "/instagram.png" },
-  { url: "/contact", image: "/linkedin.png" },
+  { url: "https://www.linkedin.com/in/ega-erinovian/", image: "/linkedin.png" },
 ];
 
 const Navbar = () => {
@@ -149,7 +149,9 @@ const Navbar = () => {
                 className=""
                 key={link.title}
               >
-                <Link href={link.url}>{link.title}</Link>
+                <Link href={link.url} target="_blank">
+                  {link.title}
+                </Link>
               </motion.div>
             ))}
           </motion.div>
